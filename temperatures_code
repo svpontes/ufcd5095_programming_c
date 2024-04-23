@@ -1,0 +1,93 @@
+#include<stdio.h>
+/*
+este codigo retorna a informação referente a média de temperaturas máximas e mínimas dos dias 
+indicados pelo utilizador. Media total e média diária das temperaturas 
+*/
+
+// Declaração de protótipos de funções
+int insertNumbers(char text[]);
+float insertNumFloat(char text[]);
+void preenche_Vector(float array_nums[], int tam_array);
+void calc_media(float first_array_nums[], float sec_array_nums[], float array_result[], int tam_array);
+
+// Função principal
+int main(){
+    int num_Dias; // Variável que guardará o número de dias introduzido pelo usuário (tamanho do array)
+   
+    // Pedir ao usuário o número de dias
+    num_Dias = insertNumbers("Introduzir número de dias que deseja inserir temperaturas: ");
+   
+    // Imprimir o número de dias introduzido
+    printf("Número de dias introduzido: %d\n", num_Dias);
+
+    // Arrays para armazenar as temperaturas máximas e mínimas
+    float tempMax[num_Dias];
+    float tempMin[num_Dias];
+   
+    // Preencher os arrays com as temperaturas máximas e mínimas
+    //chamar a função preenche_vetor para cada temperatura
+    printf("Temperaturas Máximas\n");
+    preenche_Vector(tempMax, num_Dias);
+
+    printf("Temperaturas Mínimas\n");
+    preenche_Vector(tempMin, num_Dias);
+   
+    // Array para armazenar as médias diárias
+    float res_array[num_Dias];
+   
+    // Calcular e exibir as médias
+    calc_media(tempMax, tempMin,  res_array, num_Dias);
+   
+    return 0;
+}
+
+// Função para pedir números inteiros ao usuário
+//NOME variável: numsInt (numeros inteiros)
+int insertNumbers(char text[]){
+    int numsInt;
+    printf("%s", text);
+    scanf("%d", &numsInt);
+    return numsInt;
+}
+
+// Função para pedir números float ao usuário
+//NOME variável: insertNumsFloat (inserir numeros floats)
+float insertNumFloat(char text[]){
+    float numsFloat;
+    printf("%s", text);
+    scanf("%f", &numsFloat);
+    return numsFloat;
+}
+
+// Função para preencher um vetor com valores float
+void preenche_Vector(float array_nums[], int tam_array){
+    int i;
+   
+    for(i = 0; i < tam_array; i++){
+        array_nums[i] = insertNumFloat("Introduzir temperaturas: ");
+    }
+}
+
+// Função para calcular as médias das temperaturas
+void calc_media(float first_array_nums[], float sec_array_nums[], float array_result[], int tam_array){
+    int i;
+    float mediaT=0; // Média total das temperaturas
+    int num_temperaturas_a_calcular = 2;
+    // Calcular a média diária e a média total
+    for(i = 0; i < tam_array; i++){
+        // Calcular a média diária como a média das temperaturas máxima e mínima do dia
+        array_result[i] = (first_array_nums[i] + sec_array_nums[i]) / num_temperaturas_a_calcular;
+       
+        // Adicionar a média diária à média total
+        mediaT += array_result[i];
+       
+        // Exibir as temperaturas e a média diária do dia
+        printf("\n");
+        printf("Dia [%d] Temp Máxima: [%.2f] Graus | Temp Mínima: [%.2f] Graus. | Temperatura Média Diária:  %.2f Graus\n", i+1, first_array_nums[i], sec_array_nums[i], array_result[i]);
+    }
+   
+    // Calcular a média total dividindo a soma das médias diárias pelo número de dias
+    mediaT /= tam_array;
+   
+    // Exibir a média total
+    printf("\nA Temperatura Média Total resultou:  %.2f Graus\n", mediaT);
