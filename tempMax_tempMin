@@ -1,0 +1,136 @@
+#include<stdio.h>
+
+
+// Protótipos das funções
+
+int introduzDias(); // Função para obter o número de dias
+
+void inserirTemp(int numDias, int arrayNumeros[]); // Função para inserir temperaturas
+
+void mostraNumIntroduzido(int numDias, int arrayNumeros[]); // Função para exibir as temperaturas inseridas
+
+void mediaTotal(int numDias, int arrayNumerosMin[], int arrayNumerosMax[]); // Função para calcular a média das temperaturas
+
+
+int main(){
+
+    int numDias = introduzDias(); // Obtém o número de dias
+
+    int tempMax[numDias]; // Array para temperaturas máximas
+
+    int tempMin[numDias]; // Array para temperaturas mínimas
+
+    float mediaT;
+
+   
+
+    printf("*****************************\n");
+
+    printf("Introduzir Temperatura Minima!\n");
+
+    inserirTemp(numDias, tempMin); // Insere as temperaturas mínimas
+
+
+    printf("\n");
+
+    printf("Introduzir Temperatura Maxima!\n");
+
+    inserirTemp(numDias, tempMax); // Insere as temperaturas máximas
+
+    printf("------------------------------\n");
+
+    printf("Temperatura Maxima Introduzidas!\n");
+
+    printf("-----------------------------\n");
+
+   
+
+    mostraNumIntroduzido(numDias, tempMax); // Mostra as temperaturas máximas inseridas
+
+    printf("----------------------------\n");
+
+    printf("Temperatura Minimas Introduzidas!\n");
+
+    printf("-----------------------------\n");
+
+   
+
+    mostraNumIntroduzido(numDias, tempMin); // Mostra as temperaturas mínimas inseridas
+
+    printf("*****************************\n");
+
+    mediaTotal(numDias,tempMax , tempMin); // Calcula e exibe a média das temperaturas
+
+   
+
+    return 0;
+
+}
+
+
+// Função para obter o número de dias
+
+int introduzDias(){
+
+    int numDias;
+
+    printf("\nIntroduzir numero de dias: ");
+
+    scanf("%d", &numDias);
+
+    return numDias;
+
+}
+
+
+// Função para inserir temperaturas em um array
+
+void inserirTemp(int numDias, int arrayNumeros[]){
+
+    int i;
+
+    for(i=0; i<numDias; i++){
+
+        printf("Introduzir temperatura para o dia %d: ", i + 1);
+
+        scanf("%d", &arrayNumeros[i]);
+
+    }
+
+}
+
+
+// Função para exibir as temperaturas inseridas
+
+void mostraNumIntroduzido(int numDias, int arrayNumeros[]) {
+
+    int i;
+
+    for(i = 0; i < numDias; i++) {
+
+        printf("Temperatura[%d]: %d\n", i + 1, arrayNumeros[i]);
+
+    }
+
+}
+
+
+// Função para calcular a média das temperaturas
+
+void mediaTotal(int numDias, int arrayNumerosMin[], int arrayNumerosMax[]){
+
+    int i;
+
+    float soma = 0;
+
+    for(i=0; i<numDias; i++){
+
+        float mediaT = (arrayNumerosMax[i] + arrayNumerosMin[i]) / 2.0; // Calcula a média da temperatura para cada dia
+
+        printf("Dia [%d] Para temperatura Minima de [%d] Graus e Maxima de [%d] Graus. Resultou uma Temperatura MEDIA de %.2f Graus Celcius\n", i + 1, arrayNumerosMax[i], arrayNumerosMin[i], mediaT); // Mostra as temps inseridas pelo usuário
+
+    }
+
+   
+
+}
